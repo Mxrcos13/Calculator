@@ -1,4 +1,4 @@
-let displayValue;
+let displayValue = '';
 let firstNum = 0;
 let secondNum = 0;
 let operator = '';
@@ -21,13 +21,18 @@ const operatorButtons = document.querySelectorAll('.operator')
 const screen = document.querySelector('.screen');
 
 const handleNumClick = current => {
-    displayValue = parseInt(current.target.value);
-    screen.textContent = `${displayValue}`;
-    if(firstNum === 0){
-        firstNum = displayValue;
+    clickedNum = current.target.value;
+    if(displayValue === ''){
+        displayValue = clickedNum;
     }else{
-        secondNum = displayValue;
+        displayValue = '' + displayValue + clickedNum;
     }
+    if(operator){
+        secondNum = parseInt(displayValue);
+    }else{
+        firstNum = parseInt(displayValue);
+    }
+    screen.textContent = `${displayValue}`;
 };
 
 const handleOperatorClick = current =>{
@@ -83,6 +88,7 @@ const handleOperatorClick = current =>{
             break;
     }
     screen.textContent = `${displayValue}`;
+    displayValue = '';
 }
 
 numButtons.forEach((button) =>{
