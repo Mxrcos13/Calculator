@@ -86,6 +86,11 @@ const handleOperatorClick = current =>{
              operator = '';
              test = false;
              break;
+
+        case 'C' :
+            displayValue = '';
+            secondNum = 0;
+        break;
         case 'CA' :
             firstNum = 0;
             secondNum = 0;
