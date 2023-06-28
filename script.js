@@ -31,8 +31,8 @@ const handleNumClick = current => {
 };
 
 const handleOperatorClick = current =>{
-    displayValue = current.target.value;
-    switch(displayValue){
+    const clickedOperator = current.target.value;
+    switch(clickedOperator){
         case '+' :
             if(operator === ''){
                 operator = add;
@@ -71,7 +71,7 @@ const handleOperatorClick = current =>{
             break;
         case '=' :
              displayValue = operate();
-             firstNum = displayValue;
+             firstNum = 0;
              secondNum = 0;
              operator = '';
              break;
