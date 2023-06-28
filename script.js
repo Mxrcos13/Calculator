@@ -2,6 +2,7 @@ let displayValue = '';
 let firstNum = 0;
 let secondNum = 0;
 let operator = '';
+let test = true;
 
 const add =  (a,b) => a + b;
 
@@ -22,6 +23,9 @@ const screen = document.querySelector('.screen');
 
 const handleNumClick = current => {
     clickedNum = current.target.value;
+    if(test === false){
+        displayValue = '';
+    }
     if(displayValue === ''){
         displayValue = clickedNum;
     }else{
@@ -36,6 +40,7 @@ const handleNumClick = current => {
 };
 
 const handleOperatorClick = current =>{
+    test = true;
     const clickedOperator = current.target.value;
     switch(clickedOperator){
         case '+' :
@@ -76,9 +81,10 @@ const handleOperatorClick = current =>{
             break;
         case '=' :
              displayValue = operate();
-             firstNum = 0;
+             firstNum = displayValue;
              secondNum = 0;
              operator = '';
+             test = false;
              break;
         case 'CA' :
             firstNum = 0;
@@ -88,7 +94,9 @@ const handleOperatorClick = current =>{
             break;
     }
     screen.textContent = `${displayValue}`;
-    displayValue = '';
+    if(test){
+        displayValue = '';
+    }
 }
 
 numButtons.forEach((button) =>{
