@@ -3,6 +3,8 @@ let firstNum = 0;
 let secondNum = 0;
 let operator = '';
 let test = true;
+let test2 = true;
+let decimalClicked = false;
 
 const add =  (a,b) => a + b;
 
@@ -32,15 +34,16 @@ const handleNumClick = current => {
         displayValue = '' + displayValue + clickedNum;
     }
     if(operator){
-        secondNum = parseInt(displayValue);
+        secondNum = parseFloat(displayValue);
     }else{
-        firstNum = parseInt(displayValue);
+        firstNum = parseFloat(displayValue);
     }
     screen.textContent = `${displayValue}`;
 };
 
 const handleOperatorClick = current =>{
     test = true;
+    test2 = true;
     const clickedOperator = current.target.value;
     switch(clickedOperator){
         case '+' :
@@ -51,6 +54,7 @@ const handleOperatorClick = current =>{
                 firstNum = displayValue;
                 operator = add;
             }
+            decimalClicked = false;
             break;
         case '-' :
             if(operator === ''){
@@ -60,6 +64,7 @@ const handleOperatorClick = current =>{
                 firstNum = displayValue;
                 operator = subtract;
             }
+            decimalClicked = false;
             break;
         case '/' :
             if(operator === ''){
@@ -69,6 +74,7 @@ const handleOperatorClick = current =>{
                 firstNum = displayValue;
                 operator = divide;
             }
+            decimalClicked = false;
             break;
         case '*' : 
             if(operator === ''){
@@ -78,6 +84,7 @@ const handleOperatorClick = current =>{
                 firstNum = displayValue;
                 operator = multiply
             }
+            decimalClicked = false;
             break;
         case '=' :
              displayValue = operate();
@@ -85,21 +92,30 @@ const handleOperatorClick = current =>{
              secondNum = 0;
              operator = '';
              test = false;
+             decimalClicked = false;
              break;
-
         case 'C' :
             displayValue = '';
             secondNum = 0;
+            decimalClicked = false;
         break;
         case 'CA' :
             firstNum = 0;
             secondNum = 0;
             operator = '';
             displayValue = '';
+            decimalClicked = false;
+            break;
+        case '.' :
+            if (!decimalClicked) {
+                displayValue += '.';
+                decimalClicked = true;
+                test2 = false;
+            }
             break;
     }
     screen.textContent = `${displayValue}`;
-    if(test){
+    if(test && test2){
         displayValue = '';
     }
 }
